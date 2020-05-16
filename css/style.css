@@ -1,0 +1,31 @@
+div.code-toolbar > .toolbar {
+	opacity: 1;
+}
+
+/* Separate line b/c rules are thrown out if selector is invalid.
+   IE11 and old Edge versions don't support :focus-within. */
+div.code-toolbar > .toolbar {
+	opacity: 1;
+}
+
+div.code-toolbar > .toolbar a,
+div.code-toolbar > .toolbar button,
+div.code-toolbar > .toolbar span {
+	color: white;
+}
+
+.wrapper {
+	display: flex;
+}
+
+.code-container {
+	width: 70%;
+}
+
+.colors-container {
+	width: 30%;
+}
+
+.colors-container label {
+	display: block;
+}
