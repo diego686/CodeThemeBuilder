@@ -16,6 +16,7 @@ div.code-toolbar > .toolbar span {
 
 .wrapper {
 	display: flex;
+	align-items: flex-start;
 }
 
 .code-container {
@@ -24,6 +25,9 @@ div.code-toolbar > .toolbar span {
 
 .colors-container {
 	width: 30%;
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
 }
 
 .colors-container label {
