@@ -90,8 +90,8 @@ $cssFile = fopen("./language-presets/example.css", "r") or die("Unable to open f
 $cssContents = trim(fread($cssFile, filesize("./language-presets/example.css")));
 fclose($cssFile);
 
-$gdscriptFile = fopen("./language-presets/example.gd", "r") or die("Unable to open file!");
-$gdscriptContents = trim(fread($gdscriptFile, filesize("./language-presets/example.gd")));
+$gdscriptFile = fopen("./language-presets/player.gd", "r") or die("Unable to open file!");
+$gdscriptContents = trim(fread($gdscriptFile, filesize("./language-presets/game.gd")));
 fclose($gdscriptFile);
 
 $csharpFile = fopen("./language-presets/example.cs", "r") or die("Unable to open file!");
@@ -110,8 +110,10 @@ function get_string_between($string, $start, $end){
 
 $themesPath = "./themes/";
 
-$godotContents = loadGodotFile("Solarized-Light.tet");
+$godotContents = loadGodotFile("Solarized-Dark.tet");
 $colors = parseGodotFile($godotContents);
+
+$godotEditorSettings = ["background_color", "comment_color", "keyword_color", "engine_type_color", "number_color", "text_color", "function_definition_color", "function_color", "selection_color", "string_color"];
 
 function loadGodotFile($fileName) {
     global $themesPath;
@@ -138,6 +140,11 @@ function parseGodotFile($contents) {
 
     for($i = 0; $i < $length - 1; ++$i) {
         $name = strtok($arr[$i], '=');
+
+        if (strpos($name, '/') !== false) {
+            $name = substr(strstr($name, '/'), strlen('/'));
+        }
+        
         $hexColor = "#" . substr(get_string_between($arr[$i], '"', '"'), 2);
 
         $result[$name] = $hexColor;
@@ -158,24 +165,36 @@ function parseGodotFile($contents) {
     <title>Code Theme Builder</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./css/prism_solarized_light.css">
+    <link rel="stylesheet" href="./css/godot.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script src="./js/prism.js"></script>
+    <script src="./js/function_parser.js"></script>
+
     <!-- <link rel="stylesheet" href="./css/bulma.min.css"> -->
 
 </head>
 
 <body>
     <div id="app">
-        <h1>App</h1>
+        <h1>Code Theme Editor</h1>
+
+        <select name="editor" id="editor" v-model="selectedEditor">
+            <option value="godot">Godot</option>
+            <option value="vscode">Visual Studio Code</option>
+        </select>
 
         <div class="wrapper">
+            <div class="first-container"></div>
             <div class="code-container">
-                <pre class="language-gdscript"><code><?= $csharpContents ?></code></pre>
-                <pre class="language-gdscript"><code><?= $gdscriptContents ?></code></pre>
-                <pre class="language-html"><code><?= $htmlContents ?></code></pre>
+                <div class="godot-code" v-show="selectedEditor == 'godot'">
+                    <pre class="language-gdscript"><code><?= $gdscriptContents ?></code></pre>
+                </div>
+                <!-- <pre class="language-gdscript"><code><?= $csharpContents ?></code></pre> -->
+                
+<!--                 <pre class="language-html"><code><?= $htmlContents ?></code></pre>
                 <pre class="language-css"><code><?= $cssContents ?></code></pre>
-            </div>
+            -->            </div>
 
             <div class="colors-container">
 
@@ -189,11 +208,34 @@ function parseGodotFile($contents) {
 
                 <color-selector :colorname="'--function-name-color'" :initialcolor="'#6196cc'"></color-selector> -->
 
-                <?php foreach($colors as $key=>$value): ?>
+                <div class="godot-colors" v-if="selectedEditor == 'godot'">
+                    
+                    <div class="color-theme">
+                        <h2>Color Theme</h2>
+                        <?php foreach($colors as $key=>$value): ?>
 
-                    <color-selector :colorname="'<?= $key ?>'" :initialcolor="'<?= $value ?>'"></color-selector>
+                            <?php if (in_array($key, $godotEditorSettings)): ?>
 
-                <?php endforeach; ?>
+                                <color-selector :colorname="'<?= $key ?>'" :initialcolor="'<?= $value ?>'"></color-selector>
+
+                            <?php endif ?>
+
+                        <?php endforeach; ?>
+                    </div>
+
+                    <div class="other-settings">
+                        <h3>Other Settings</h3>
+                        <?php foreach($colors as $key=>$value): ?>
+
+                            <?php if (!in_array($key, $godotEditorSettings)): ?>
+
+                                <color-selector :colorname="'<?= $key ?>'" :initialcolor="'<?= $value ?>'"></color-selector>
+
+                            <?php endif ?>
+
+                        <?php endforeach; ?>
+                    </div>
+                </div>
 
             </div>
         </div>

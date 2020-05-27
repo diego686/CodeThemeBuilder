@@ -36,7 +36,7 @@ var v3 = Vector3(1, 2, 3)
 
 # Function
 
-func some_function(param1, param2):
+func some_function(param1, param2) -> int:
     var local_var = 5
 
     if param1 < local_var:

@@ -3,7 +3,7 @@ div.code-toolbar > .toolbar {
 }
 
 /* Separate line b/c rules are thrown out if selector is invalid.
-   IE11 and old Edge versions don't support :focus-within. */
+IE11 and old Edge versions don't support :focus-within. */
 div.code-toolbar > .toolbar {
 	opacity: 1;
 }
@@ -14,22 +14,85 @@ div.code-toolbar > .toolbar span {
 	color: white;
 }
 
+body {
+/*	background: #2d2d2d;
+color: #fff;*/
+}
+
 .wrapper {
 	display: flex;
-	align-items: flex-start;
+	/*align-items: flex-start;*/
+	justify-content: center;
+	/*margin: 0 auto;*/
+	/*width: 90%;*/
+	/*margin-right: 0%;*/
 }
 
 .code-container {
-	width: 70%;
+	width: min-content;
+	/*filter: drop-shadow(0px 5px 10px #000000);*/
+/*	background: #000;
+	border: 20px solid black;
+	border-width: 20px 30px;
+	border-radius: 5px;*/
 }
 
 .colors-container {
-	width: 30%;
-	position: sticky;
-	position: -webkit-sticky;
-	top: 0;
+	width: 400px;
+	margin: 0 2%;
+/*	position: sticky;
+position: -webkit-sticky;*/
+top: 0;
+/*text-align: center;*/
 }
 
 .colors-container label {
 	display: block;
+}
+
+body {
+	background: var(--background-color);
+	color: var(--text-color);
+	font-family: 'Bitter', serif;
+}
+
+.color-selector {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+
+.color-selector label {
+	width: 100%;
+	font-size: 16px;
+}
+
+input {
+	margin: 4px;
+	padding: 0;
+	border: 0;
+	height: 34px;
+	border-radius: 3px;
+}
+
+input[type=text] {
+	background: var(--background-color);
+	color: var(--text-color);
+	filter: contrast(1.1);
+	font-size: 18px;
+	font-family: var(--code-font);
+	padding-left: 10px;
+}
+
+input[type=color] {
+	background-color: #777777;
+	cursor: pointer;
+}
+
+input[type=color]:hover {
+	background-color: white;
+}
+
+.color-theme {
+	margin-bottom: 40px;
 }
