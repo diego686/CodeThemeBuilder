@@ -39,6 +39,7 @@
 				// console.log(this.cssColorName);
 				let root = document.documentElement;
 				root.style.setProperty(this.cssColorName, this.hexColor);
+				this.$emit('colorchanged', this.colorname, this.hexColor);
 			}
 		},
 

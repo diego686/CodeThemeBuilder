@@ -32,7 +32,7 @@ function parseCode() {
 	// var strippedTest = codeDiv.innerHTML;
 	var strippedTest = codeDiv.innerHTML.replace(/<span.*>.*<\/span>/ig,"");
 	// var strippedTest = codeDiv.innerHTML.replace(/<.*>/ig,"");
-	console.log(strippedTest);
+	// console.log(strippedTest);
 }
 
 if(window.attachEvent) {

@@ -168,6 +168,9 @@ function parseGodotFile($contents) {
     <link rel="stylesheet" href="./css/godot.css">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/jam-icons/css/jam.min.css"> -->
+    
+    <!-- <script src="https://unpkg.com/feather-icons"></script> -->
     <script src="./js/prism.js"></script>
     <script src="./js/function_parser.js"></script>
 
@@ -176,6 +179,7 @@ function parseGodotFile($contents) {
 </head>
 
 <body>
+    
     <div id="app">
         <h1>Code Theme Editor</h1>
 
@@ -184,45 +188,44 @@ function parseGodotFile($contents) {
             <option value="vscode">Visual Studio Code</option>
         </select>
 
+        <button @click="exportTheme">Export</button>
+
         <div class="wrapper">
             <div class="first-container"></div>
             <div class="code-container">
                 <div class="godot-code" v-show="selectedEditor == 'godot'">
                     <pre class="language-gdscript"><code><?= $gdscriptContents ?></code></pre>
-                </div>
-                <!-- <pre class="language-gdscript"><code><?= $csharpContents ?></code></pre> -->
-                
-<!--                 <pre class="language-html"><code><?= $htmlContents ?></code></pre>
-                <pre class="language-css"><code><?= $cssContents ?></code></pre>
-            -->            </div>
-
+                </div>   
+            </div>
             <div class="colors-container">
 
-             <!--    <color-selector :colorname="'--background-color'" :initialcolor="'#2d2d2d'"></color-selector>
+                <div class="toggle-container">
+                    <div @click="toggleShowColors" v-show="showColors">
+                        <span class="show-color" data-jam="eye" height="32" width="32" data-fill="#fff"></span>
+                    </div>
+                    <div @click="toggleShowColors" v-show="! showColors">
+                        <span class="show-color" data-jam="eye-close" height="32" width="32" data-fill="#fff"></span>
+                    </div>
+                </div>
+                
+                
 
-                <color-selector :colorname="'--comment-color'" :initialcolor="'#999999'"></color-selector>
 
-                <color-selector :colorname="'--puncuation-color'" :initialcolor="'#cccccc'"></color-selector>
+                <div class="godot-colors" v-if="selectedEditor == 'godot'" v-show="showColors" >
 
-                <color-selector :colorname="'--tag-color'" :initialcolor="'#e2777a'"></color-selector>
-
-                <color-selector :colorname="'--function-name-color'" :initialcolor="'#6196cc'"></color-selector> -->
-
-                <div class="godot-colors" v-if="selectedEditor == 'godot'">
-                    
                     <div class="color-theme">
                         <h2>Color Theme</h2>
+
                         <?php foreach($colors as $key=>$value): ?>
 
                             <?php if (in_array($key, $godotEditorSettings)): ?>
 
-                                <color-selector :colorname="'<?= $key ?>'" :initialcolor="'<?= $value ?>'"></color-selector>
+                                <color-selector :colorname="'<?= $key ?>'" :initialcolor="'<?= $value ?>'" @colorchanged="storeColor"></color-selector>
 
                             <?php endif ?>
 
                         <?php endforeach; ?>
                     </div>
-
                     <div class="other-settings">
                         <h3>Other Settings</h3>
                         <?php foreach($colors as $key=>$value): ?>
@@ -235,13 +238,14 @@ function parseGodotFile($contents) {
 
                         <?php endforeach; ?>
                     </div>
-                </div>
 
+
+                </div>
             </div>
         </div>
     </div>
-
     <script src="./dist/app.js"></script>
+    <script src="https://unpkg.com/jam-icons/js/jam.min.js"></script>
 </body>
 
 </html>
