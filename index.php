@@ -201,10 +201,10 @@ function parseGodotFile($contents) {
 
                 <div class="toggle-container">
                     <div @click="toggleShowColors" v-show="showColors">
-                        <span class="show-color" data-jam="eye" height="32" width="32" data-fill="#fff"></span>
+                        <span class="show-color" data-jam="eye-close" height="32" width="32" data-fill="#fff"></span>
                     </div>
                     <div @click="toggleShowColors" v-show="! showColors">
-                        <span class="show-color" data-jam="eye-close" height="32" width="32" data-fill="#fff"></span>
+                        <span class="show-color" data-jam="eye" height="32" width="32" data-fill="#fff"></span>
                     </div>
                 </div>
                 
@@ -214,6 +214,12 @@ function parseGodotFile($contents) {
                 <div class="godot-colors" v-if="selectedEditor == 'godot'" v-show="showColors" >
 
                     <div class="color-theme">
+                        <h2>Color Theme</h2>
+
+                        <color-selector v-for="(color, index) in godotColors" :key="color.colorname" :colorname="index" :initialcolor="color" @colorchanged="storeColor"></color-selector>
+                    </div>
+
+                    <!-- <div class="color-theme">
                         <h2>Color Theme</h2>
 
                         <?php foreach($colors as $key=>$value): ?>
@@ -237,7 +243,7 @@ function parseGodotFile($contents) {
                             <?php endif ?>
 
                         <?php endforeach; ?>
-                    </div>
+                    </div> -->
 
 
                 </div>

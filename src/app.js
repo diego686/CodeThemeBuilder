@@ -43,7 +43,7 @@ new Vue({
 
 		storeColor: function(value1, value2) {
 			this.godotColors[value1] = value2;
-			console.log(this.godotColors);
+			// console.log(this.godotColors);
 			// console.log(value1 + ", " + value2);
 		}
 	}
