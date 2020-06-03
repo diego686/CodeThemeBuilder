@@ -2,15 +2,10 @@
 	<div class="color-selector">
 		<label v-bind:title="hexColor">{{ this.labelName }}</label>
 		<input type="text" v-model="hexColor" @input="updateColor" @change="saveColor">
-		<!-- <input type="text"> -->
+		<!-- <input type="text" v-model="colorOpacity" @input="updateColor"> -->
 		<input type="color" v-model="hexColor" @input="updateColor" @change="saveColor">
 		
-		<!-- <style>
-		:root {
-			--background-color: {{ hexColor }};
-		}
-	</style> -->
-</div>
+	</div>
 </template>
 
 <script>
@@ -21,13 +16,15 @@
 		data () {
 			return {
 				name: this.colorname,
-				hexColor: this.initialcolor
+				hexColor: this.initialcolor,
+				colorOpacity: this.initialopacity,
 			}
 		},
 
 		props: [
 		'colorname',
-		'initialcolor'
+		'initialcolor',
+		'initialopacity',
 		],
 
 		mounted: function() {
@@ -54,6 +51,9 @@
 			cssColorName: function() {
 				// return this.colorname;
 				return '--' + this.colorname.replace(/_/g, '-').trim();
+			},
+			displayColor: function() {
+				return this.hexColor + this.colorOpacity;
 			}
 		}
 	}

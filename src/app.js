@@ -17,14 +17,30 @@ new Vue({
 		showColors: true,
 		eyeIcon: 'eye',
 		godotColors: {},
+		godotOpacity: {},
+		codeText: '',
 	},
 
-	mounted() {
-		axios.get('http://localhost:8000/api/godot')
-		.then(response => (this.godotColors = response.data));
-	},
+	created() {
+		
 
+		axios.get('http://localhost:8000/api/godot?opacity=true')
+		.then(response => response.data).then(data => {
+			this.godotOpacity = data;
+			this.getGodotColors();
+		})
+		.catch(error => console.log(error));
+
+		axios.get('http://localhost:8000/api/languages/gdscript')
+		.then(response => (this.codeText = response.data))
+		.catch(error => console.log(error));
+	},
 	methods: {
+		getGodotColors: function() {
+			axios.get('http://localhost:8000/api/godot', )
+			.then(response => (this.godotColors = response.data))
+			.catch(error => console.log(error));
+		},
 		toggleShowColors: function() {
 			this.showColors = ! this.showColors;
 
@@ -46,5 +62,18 @@ new Vue({
 			// console.log(this.godotColors);
 			// console.log(value1 + ", " + value2);
 		}
+	},
+	watch: {
+		codeText: function() {
+			this.$nextTick(function() {
+				Prism.highlightAll();
+				// console.log("highlightCode ran");
+			});
+		}
 	}
-});
+	// updated: function() {
+	// 	Prism.highlightAll();
+	// 	// console.log("highlightCode ran");
+	// }
+}
+);
