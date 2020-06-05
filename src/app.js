@@ -19,6 +19,7 @@ new Vue({
 		godotColors: {},
 		godotOpacity: {},
 		codeText: '',
+		exportFileName: '',
 	},
 
 	created() {
@@ -43,18 +44,48 @@ new Vue({
 		},
 		toggleShowColors: function() {
 			this.showColors = ! this.showColors;
-
-			if (this.showColors) {
-				this.eyeIcon = 'eye';
-			} else {
-				this.eyeIcon = 'eye-close';
-			}
 		},
 
 		exportTheme: function() {
 			if (this.selectedEditor === 'godot') {
-				console.log('exporting for ' + this.selectedEditor);
+				// console.log('exporting for ' + this.selectedEditor);
+				var fileContents = this.convertToGodotThemeFile();
+
+				// Start file download
+				if (this.exportFileName.length !== 0) {
+					this.download(this.exportFileName + ".tet", fileContents);
+				} else {
+					this.download("GodotTheme.tet", fileContents);
+				}
+				
 			}
+		},
+
+		convertToGodotThemeFile: function() {
+			var colors = this.godotColors;
+			var result = '';
+
+			result += '[color_theme]\n\n';
+
+			for (var color in colors) {
+				// console.log(color);
+				result += color + '=' + this.godotOpacity[color] + colors[color].substring(1) + '\n';
+			}
+
+			return result;
+		},
+
+		download: function(filename, text) {
+			var element = document.createElement('a');
+			element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+			element.setAttribute('download', filename);
+
+			element.style.display = 'none';
+			document.body.appendChild(element);
+
+			element.click();
+
+			document.body.removeChild(element);
 		},
 
 		storeColor: function(value1, value2) {

@@ -94,6 +94,53 @@ input[type=color]:hover {
 	background-color: white;
 }
 
+button {
+	padding: 10px;
+	border: 2px solid var(--text-color);
+	background: inherit;
+	/*background: var(--background-color);*/
+	color: var(--text-color);
+	filter: contrast(1.1);
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+button:hover {
+	border: 2px solid var(--keyword-color);
+	color: var(--keyword-color);
+}
+
+button:hover svg {
+	fill: var(--keyword-color);
+}
+
+.export-button {
+	margin-left: 20px;
+}
+
+select, option {
+	color: var(--text-color);
+	background: var(--background-color);
+	padding: 5px 10px;
+	border-radius: 3px;
+	font-weight: bold;
+}
+
+option {
+	height: 10px;
+	font-weight: normal;
+}
+
+a {
+	color: var(--keyword-color);
+}
+
+svg {
+	fill: var(--text-color);
+}
+
 .color-theme {
 	margin-bottom: 40px;
 }
@@ -101,6 +148,16 @@ input[type=color]:hover {
 .jam {
 	height: 32px;
 	width: 32px;
+}
+
+.jam-24 {
+	height: 24px;
+	width: 24px;
+}
+
+.jam-16 {
+	height: 16px;
+	width: 16px;
 }
 
 .toggle-container {
@@ -113,4 +170,35 @@ input[type=color]:hover {
 
 .toggle-container .show-color:hover {
 	filter: brightness(1.5);
+}
+
+.end-wrapper {
+	max-width: 1000px;
+	margin: auto;
+	font-size: 20px;
+}
+
+.end-wrapper label {
+	display: block;
+}
+
+.export-wrapper {
+	padding: 50px;
+	/*filter: drop-shadow(0 0 5px #000);*/
+	/*box-shadow: 5px 5px 10px #000;*/
+}
+
+.menu-container {
+	margin: auto;
+	text-align: center;
+}
+
+.menu-container > * {
+	margin: 20px;
+}
+
+.download-container {
+	margin-top: 30px;
+	width: 420px;
+	margin: auto;
 }

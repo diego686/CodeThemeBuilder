@@ -31,7 +31,7 @@
 			let root = document.documentElement;
 			root.style.setProperty(this.cssColorName, this.hexColor);
 		},
-
+ 
 		methods: {
 			updateColor: function() {
 				// console.log(this.cssColorName);
