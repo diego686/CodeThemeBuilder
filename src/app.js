@@ -16,14 +16,48 @@ new Vue({
 		selectedEditor: 'godot',
 		showColors: true,
 		eyeIcon: 'eye',
+		showOthers: false,
 		godotColors: {},
+		colorsArray: ['background_color', 'text_color', 'comment_color', 'keyword_color', 'engine_type_color', 'string_color', 'number_color', 'function_definition_color'],
 		godotOpacity: {},
 		codeText: '',
 		exportFileName: '',
+		languageLoading: true,
+		colorsLoading: true,
+		vueLoading: true,
+	},
+
+	computed: {
+		editableGodotColors: function() {
+			var result = {};
+
+			for (var i = 0; i < this.colorsArray.length; ++i) {
+				if (this.colorsArray[i] in this.godotColors) {
+					result[this.colorsArray[i]] = this.godotColors[this.colorsArray[i]];
+				}
+			}
+
+			return result;
+		},
+
+		otherGodotSettings: function() {
+			var result = {};
+			var diff_array = [];
+
+			var colorKeys = Object.keys(this.godotColors);
+
+			diff_array = colorKeys.diff(this.colorsArray);
+
+			for (var i = 0; i < diff_array.length; ++i) {
+				result[diff_array[i]] = this.godotColors[diff_array[i]];
+			}
+
+			return result;
+		}
 	},
 
 	created() {
-		
+
 
 		axios.get('http://localhost:8000/api/godot?opacity=true')
 		.then(response => response.data).then(data => {
@@ -34,16 +68,22 @@ new Vue({
 
 		axios.get('http://localhost:8000/api/languages/gdscript')
 		.then(response => (this.codeText = response.data))
+		.finally(this.languageLoading = false)
 		.catch(error => console.log(error));
 	},
 	methods: {
 		getGodotColors: function() {
 			axios.get('http://localhost:8000/api/godot', )
 			.then(response => (this.godotColors = response.data))
+			.finally(this.colorsLoading = false)
 			.catch(error => console.log(error));
 		},
 		toggleShowColors: function() {
 			this.showColors = ! this.showColors;
+		},
+
+		toggleShowOthers: function() {
+			this.showOthers = ! this.showOthers;
 		},
 
 		exportTheme: function() {
@@ -98,6 +138,7 @@ new Vue({
 		codeText: function() {
 			this.$nextTick(function() {
 				Prism.highlightAll();
+				this.vueLoading = false;
 				// console.log("highlightCode ran");
 			});
 		}

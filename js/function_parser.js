@@ -1,3 +1,9 @@
+// Find difference between two arrays
+Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
+
+
 function parseCode() {
 	var func_definition_start = false;
 	var is_in_func = false;
