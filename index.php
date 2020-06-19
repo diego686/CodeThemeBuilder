@@ -53,16 +53,18 @@
     <div class="menu-container">
         <select name="editor" id="editor" v-model="selectedEditor">
             <option value="godot">Godot</option>
-            <option value="vscode" disabled>Visual Studio Code</option>
+            <!-- <option value="vscode" disabled>Visual Studio Code</option> -->
+            <option value="more" disabled>More Coming Soon...</option>
         </select>
 
         <!-- <a href=".">Refresh</a> -->
         <a href="#export-your-theme">Ready For Export</a>
+        <a href="#about">About</a>
     </div>
 
 
 
-    <div class="wrapper">
+    <div class="main-wrapper">
         <div class="first-container"></div>
         <div class="code-container">
             <div class="godot-code" v-show="selectedEditor == 'godot'">
@@ -87,6 +89,10 @@
 
                 <div class="color-theme">
                     <h2>Color Theme</h2>
+                    <div class="info tooltip" title="Color options you can edit live on this page.">
+                        <span class="info jam-24" data-jam="info" height="32" width="32" data-fill="#fff" ></span>
+                    </div>
+                    
 
                     <color-selector v-for="(color, index) in editableGodotColors" :key="color.colorname" :colorname="index" :initialcolor="color" :initialopacity="godotOpacity[index]" @colorchanged="storeColor"></color-selector>
                 </div>
@@ -101,7 +107,14 @@
                         <span class="show-color jam-24" data-jam="chevron-down" height="32" width="32" data-fill="#fff"></span>
                     </div>
 
+                    <div class="info tooltip" v-show="showOthers" title="Other color options supported by the editor but won't be previewed on this page.">
+                        <span class="info jam-24" data-jam="info" height="32" width="32" data-fill="#fff" ></span>
+                    </div>
+
+                    
+
                     <div class="other-container" v-show="showOthers">
+
                         <color-selector v-for="(color, index) in otherGodotSettings" :key="color.colorname" :colorname="index" :initialcolor="color" :initialopacity="godotOpacity[index]" @colorchanged="storeColor"></color-selector>
                     </div>
 
@@ -112,9 +125,11 @@
         </div>
     </div>
 
+    <hr>
+
     <div class="end-wrapper">
 
-        <div id="export-your-theme" class="export-wrapper">
+        <div id="export-your-theme" class="export-wrapper" v-show="selectedEditor == 'godot'">
             <h3>Export Your Godot Theme</h3>
             <div class="download-container">
                 <label for="filename">File Name</label>
@@ -126,7 +141,7 @@
             </div>
         </div> 
 
-        <div class="installation-wrapper">
+        <div class="installation-wrapper" v-show="selectedEditor == 'godot'">
             <h3>Installation</h3>
             <p>Place the .tet files in your Godot text editor theme directory:</p>
             <ul>
@@ -145,6 +160,19 @@
         </div>
 
     </div>
+    <hr>
+    <div class="comments-wrapper">
+        <comment-section></comment-section>
+        
+    </div>
+    <hr>
+    <div id="about" class="seo-wrapper">
+        <h3>About</h3>
+
+        <h4>What is this website?</h4>
+        <p>This is an online theme editor for programmers. Text editors and IDEs highlight code with different colors to make the code easier to read for humans. This online application allows you to edit the colors of a theme with a live preview of the changes you are making. You can then export the theme you have made to a file that is compatible with your editor.</p>
+    </div>
+
 </div>
 <script src="./dist/app.js"></script>
 <script src="https://unpkg.com/jam-icons/js/jam.min.js"></script>

@@ -1,15 +1,6 @@
 <template>
 	<div>
-		<div class="code-container">
-			<pre class="language-gdscript">
-				<code>
-					
-				</code>
-			</pre>
-		</div>
-		<div class="colors-container">
-			
-		</div>
+		
 	</div>
 </template>
 

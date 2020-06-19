@@ -1,15 +1,31 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+// import VueRouter from 'vue-router';
 import ColorSelector from './components/ColorSelector';
+import CommentSection from './components/CommentSection';
+// import Godot from './components/Godot';
 
 Vue.use(VueAxios, axios);
+// Vue.use(VueRouter);
+
+// const router = new VueRouter({
+// 	routes: [
+// 		{ path: '/', component: Godot }
+// 	],
+
+// 	mode: 'history'
+// });
+
 
 new Vue({
 	el: '#app',
 
+	// router,
+
 	components: {
 		ColorSelector,
+		CommentSection,
 	},
 
 	data: {
