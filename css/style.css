@@ -79,7 +79,7 @@ input {
 	border-radius: 3px;
 }
 
-input[type=text] {
+input[type=text], input[type=email] {
 	background: var(--background-color);
 	color: var(--text-color);
 	filter: contrast(1.1);
@@ -126,6 +126,7 @@ button:hover svg {
 select, option {
 	color: var(--text-color);
 	background: var(--background-color);
+  border-color: var(--text-color);
 	padding: 5px 10px;
 	border-radius: 3px;
 	font-weight: bold;
@@ -249,7 +250,10 @@ hr {
   font-size: 18px;
 }
 
-
+.comments-wrapper {
+  max-width: 800px;
+  margin: 100px auto;
+}
 
 
 

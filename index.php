@@ -9,13 +9,9 @@
     <link rel="stylesheet" href="./css/godot.css">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://unpkg.com/jam-icons/css/jam.min.css"> -->
-    
-    <!-- <script src="https://unpkg.com/feather-icons"></script> -->
+
     <script src="./js/prism.js"></script>
     <script src="./js/function_parser.js"></script>
-
-    <!-- <link rel="stylesheet" href="./css/bulma.min.css"> -->
 
 </head>
 
@@ -47,7 +43,7 @@
     </div>
 
     <header>
-        <h1>Code Theme Editor</h1>
+        <h1>Code Theme Builder</h1>
     </header>
 
     <div class="menu-container">

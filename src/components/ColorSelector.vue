@@ -4,6 +4,13 @@
 		<input type="text" v-model="hexColor" @input="updateColor" @change="saveColor">
 		<!-- <input type="text" v-model="colorOpacity" @input="updateColor"> -->
 		<input type="color" v-model="hexColor" @input="updateColor" @change="saveColor">
+		<!-- <div class="fontStyles">
+			<input type="radio" name="fontStyle" value="none" checked>
+			<label for="bold" class="bold">b</label>
+			<input type="radio" id="bold" name="fontStyle" value="bold">
+			<label for="italic" class="italic">i</label>
+			<input type="radio" id="italic" name="fontStyle" value="italic">
+		</div> -->
 		
 	</div>
 </template>
@@ -31,7 +38,7 @@
 			let root = document.documentElement;
 			root.style.setProperty(this.cssColorName, this.hexColor);
 		},
- 
+
 		methods: {
 			updateColor: function() {
 				// console.log(this.cssColorName);
@@ -63,4 +70,19 @@
 label {
 	text-transform: capitalize;
 }
+
+.fontStyles label {
+	text-transform: none;
+	display: inline;
+}
+
+.bold {
+	font-weight: bolder;
+}
+
+.italic {
+	font-style: italic;
+}
+
+
 </style>

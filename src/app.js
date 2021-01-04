@@ -4,7 +4,8 @@ import VueAxios from 'vue-axios';
 // import VueRouter from 'vue-router';
 import ColorSelector from './components/ColorSelector';
 import CommentSection from './components/CommentSection';
-// import Godot from './components/Godot';
+
+import {BASE_URL} from './const';
 
 Vue.use(VueAxios, axios);
 // Vue.use(VueRouter);
@@ -75,21 +76,21 @@ new Vue({
 	created() {
 
 
-		axios.get('http://localhost:8000/api/godot?opacity=true')
+		axios.get(`${BASE_URL}/api/godot?opacity=true`)
 		.then(response => response.data).then(data => {
 			this.godotOpacity = data;
 			this.getGodotColors();
 		})
 		.catch(error => console.log(error));
 
-		axios.get('http://localhost:8000/api/languages/gdscript')
+		axios.get(`${BASE_URL}/api/languages/gdscript/`)
 		.then(response => (this.codeText = response.data))
 		.finally(this.languageLoading = false)
 		.catch(error => console.log(error));
 	},
 	methods: {
 		getGodotColors: function() {
-			axios.get('http://localhost:8000/api/godot', )
+			axios.get(`${BASE_URL}/api/godot/`, )
 			.then(response => (this.godotColors = response.data))
 			.finally(this.colorsLoading = false)
 			.catch(error => console.log(error));
